@@ -1,0 +1,49 @@
+const express 	= require('express');
+const router 	= express.Router();
+
+router.get('/', (req, res)=>{
+	
+	/*if(req.session.uname != ""){
+		res.render('home/index', {name: 'alamin', id:'123'});		
+	}else{
+		res.redirect('/login');
+	}*/
+
+	if(req.cookies['uname'] != ""){
+		res.render('home/index', {name: 'alamin', id:'123'});		
+	}else{
+		res.redirect('/login');
+	}
+});
+
+
+router.get('/userlist', (req, res)=>{
+
+	if(req.cookies['uname'] != ""){
+
+		// var students = [
+		// 	['1', 'alamin', 'abc@gmail.com', '1243'],
+		// 	['2', 'pqr', 'pqr@gmail.com', '1243'],
+		// 	['3', 'xyz', 'xyz@gmail.com', '1243']
+		// ];
+		req.session.name= [
+			['1', 'alamin', 'abc@gmail.com', '1243'],
+			['2', 'pqr', 'pqr@gmail.com', '1243'],
+			['3', 'xyz', 'xyz@gmail.com', '1243']
+		];
+		//var name = req.session.name;
+
+		//var data = {users: students};
+		res.render('home/userlist', {users: req.session.name});		
+	}else{
+		res.redirect('/login');
+	}
+})
+
+module.exports = router;
+
+//url design eg. /logout -> get or post request
+//adding middleware to app.js
+//creating controller/router  eg. router.get(), router.post()
+//creating VIEWS
+//sending response -> json, ejs
