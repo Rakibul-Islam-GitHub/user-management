@@ -10,10 +10,24 @@ router.get('/create', (req, res)=>{
 	}
 });
 
+
 router.post('/create', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
-		res.send('success');
+		// res.send('success');
+		console.log(req.body);
+		//console.log( req.session.name.length);
+		let id= 1+ (req.session.name.length);
+		let username=req.body.username;
+		let password= req.body.password;
+		let email= req.body.email;
+		let newuser= [id,username,email,password,];
+		req.session.name.push(newuser);
+		console.log(newuser);
+		console.log(req.session.name);
+		//res.render('home/userlist', {users: req.session.name});	
+		res.redirect('/home/userlist');
+
 	}else{
 		res.redirect('/login');
 	}

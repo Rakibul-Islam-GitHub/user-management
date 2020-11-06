@@ -26,14 +26,18 @@ router.get('/userlist', (req, res)=>{
 		// 	['2', 'pqr', 'pqr@gmail.com', '1243'],
 		// 	['3', 'xyz', 'xyz@gmail.com', '1243']
 		// ];
-		req.session.name= [
-			['1', 'alamin', 'abc@gmail.com', '1243'],
-			['2', 'pqr', 'pqr@gmail.com', '1243'],
-			['3', 'xyz', 'xyz@gmail.com', '1243']
-		];
-		//var name = req.session.name;
+		
+		if(req.session.name==undefined){
 
-		//var data = {users: students};
+			req.session.name= [
+				['1', 'alamin', 'abc@gmail.com', '1243'],
+				['2', 'pqr', 'pqr@gmail.com', '1243'],
+				['3', 'xyz', 'xyz@gmail.com', '1243']
+			];
+
+		}
+		
+		
 		res.render('home/userlist', {users: req.session.name});		
 	}else{
 		res.redirect('/login');
