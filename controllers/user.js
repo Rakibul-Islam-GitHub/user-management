@@ -15,18 +15,18 @@ router.post('/create', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
 		// res.send('success');
-		console.log(req.body);
+		//console.log(req.body);
 		//console.log( req.session.name.length);
-		let id= 1+ (req.session.name.length);
+		let id= (1+ (req.session.name.length)).toString();
 		let username=req.body.username;
 		let password= req.body.password;
 		let email= req.body.email;
 		let newuser= [id,username,email,password,];
 		req.session.name.push(newuser);
-		console.log(newuser);
-		console.log(req.session.name);
-		//res.render('home/userlist', {users: req.session.name});	
-		res.redirect('/home/userlist');
+		// console.log(newuser);
+		// console.log(req.session.name);
+		res.render('home/userlist', {users: req.session.name});	
+		//res.redirect('/home/userlist');
 
 	}else{
 		res.redirect('/login');
@@ -78,7 +78,10 @@ router.post('/delete/:id', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
 		//res.send('done!');
-		req.session.name.splice((req.params.id-1), 1); 
+		//req.session.name.splice((req.params.id-1), 1); 
+		req.session.name.splice(req.session.name.findIndex(function(i){
+			return i.id == req.params.id;
+		}), 1);
 		res.redirect('/home/userlist');
 
 	}else{
