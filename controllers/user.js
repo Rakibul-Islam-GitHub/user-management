@@ -33,19 +33,29 @@ router.post('/create', (req, res)=>{
 	}
 });
 
-router.get('/edit', (req, res)=>{
+router.get('/edit/:id', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
-		res.render('user/edit');
+		let id= (req.params.id)-1;
+		var user = {username: req.session.name[id][1], email: req.session.name[id][2], password: req.session.name[id][3]};
+		res.render('user/edit', user);
+		
 	}else{
 		res.redirect('/login');
 	}
 });
 
-router.post('/edit', (req, res)=>{
+router.post('/edit/:id', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
-		res.send('updated');
+		let id= req.params.id;
+		let username=req.body.username;
+		let password= req.body.password;
+		let email= req.body.email;
+		let user= [id,username,email,password,];
+		req.session.name.splice((req.params.id-1), 1,user); 
+		//res.send('updated');
+		res.redirect('/home/userlist');
 	}else{
 		res.redirect('/login');
 	}
