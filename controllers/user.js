@@ -51,20 +51,26 @@ router.post('/edit', (req, res)=>{
 	}
 });
 
-router.get('/delete', (req, res)=>{
+router.get('/delete/:id', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
-		var user = {username: 'alamin', password: '123', email: 'email@gmail.com'};
+		console.log(req.params.id);
+		//let username= req.session.name[0][0];
+		let id= (req.params.id)-1;
+		var user = {username: req.session.name[id][1], password: req.session.name[id][2], email: req.session.name[id][3]};
 		res.render('user/delete', user);
 	}else{
 		res.redirect('/login');
 	}
 });
 
-router.post('/delete', (req, res)=>{
+router.post('/delete/:id', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
-		res.send('done!');
+		//res.send('done!');
+		req.session.name.splice((req.params.id-1), 1); 
+		res.redirect('/home/userlist');
+
 	}else{
 		res.redirect('/login');
 	}

@@ -30,7 +30,7 @@ router.get('/userlist', (req, res)=>{
 		if(req.session.name==undefined){
 
 			req.session.name= [
-				['1', 'alamin', 'abc@gmail.com', '1243'],
+				['1', 'Rakibul', 'abc@gmail.com', '1243'],
 				['2', 'pqr', 'pqr@gmail.com', '1243'],
 				['3', 'xyz', 'xyz@gmail.com', '1243']
 			];
