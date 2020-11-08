@@ -1,16 +1,13 @@
 const express 	= require('express');
 const router 	= express.Router();
 
-router.get('/', (req, res)=>{
-	
-	/*if(req.session.uname != ""){
-		res.render('home/index', {name: 'alamin', id:'123'});		
-	}else{
-		res.redirect('/login');
-	}*/
 
-	if(req.cookies['uname'] != ""){
-		res.render('home/index', {name: 'alamin', id:'123'});		
+router.get('/', (req, res)=>{
+
+	
+	if(req.cookies['uname'] != null){
+		
+		res.render('home/index', {name: 'Rakibul', id:'123'});		
 	}else{
 		res.redirect('/login');
 	}
@@ -21,11 +18,7 @@ router.get('/userlist', (req, res)=>{
 
 	if(req.cookies['uname'] != ""){
 
-		// var students = [
-		// 	['1', 'alamin', 'abc@gmail.com', '1243'],
-		// 	['2', 'pqr', 'pqr@gmail.com', '1243'],
-		// 	['3', 'xyz', 'xyz@gmail.com', '1243']
-		// ];
+		
 		
 		if(req.session.name==undefined){
 

@@ -12,7 +12,7 @@ router.post('/', (req, res)=>{
 
 	if(req.body.username == req.body.password){
 		//req.session.uname = req.body.username;
-		res.cookie('uname', 'alamin');
+		res.cookie('uname', 'rakibul');
 		res.redirect('/home');
 
 	}else{

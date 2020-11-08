@@ -1,5 +1,5 @@
 //declaration
-const express 			= require('express');	
+const express 			= require('express');
 const bodyParser 		= require('body-parser');
 const exSession 		= require('express-session');
 const cookieParser 		= require('cookie-parser');
@@ -26,6 +26,8 @@ app.use('/user', user);
 
 //router
 app.get('/', (req, res)=>{
+	// console.log(users.length);
+	// console.log(users[0].id);
 	res.send('Welcome');
 });
 
